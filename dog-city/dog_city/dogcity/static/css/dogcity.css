@@ -1,0 +1,63 @@
+body {
+  font-family: Helvetica;
+  background-color: black;
+}
+
+h2 {
+  font-family: Helvetica
+}
+
+.hero {
+  width: 100vw;
+  position: fixed;
+  z-index: -1;
+  left: 0;
+  top: -20px;
+}
+
+.logo {
+  width: 100px;
+  margin-left: 8%;
+  z-index: 6;
+  opacity: 1;
+  position: relative;
+}
+
+nav {
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 70px;
+  width: 100%;
+  line-height: 70px;
+  text-align: right;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+nav a {
+  text-decoration: none;
+  color: white;
+  font-weight: 800;
+  display: inline-block;
+  padding: 0 60px 0 20px;
+  font-size: 24px;
+  text-transform: uppercase;
+}
+
+h1 {
+  color: white;
+  font-weight: 600;
+  padding-top: 13%;
+  margin-left: 8%;
+  position: relative;
+  font-size: 7em;
+}
+
+h3 {
+  color: white;
+  margin-left: 8%;
+  font-size: 3em;
+  font-weight: 300;
+  margin-top: -60px;
+}

@@ -6,13 +6,13 @@ from django.utils import timezone
 
 class Owner(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    email = models.EmailField(max_length=100)
+    first_name = models.CharField(max_length=100, blank=True)
+    last_name = models.CharField(max_length=100, blank=True)
+    email = models.EmailField(max_length=100, blank=True)
     zipcode = models.PositiveIntegerField(null=True, blank=True)
 
     def __str__(self):
-        return self.user
+        return f'{self.first_name} {self.last_name}'
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
@@ -35,8 +35,9 @@ class Dog(models.Model):
         return self.name
 
 class Playdate(models.Model):
-    created_date = models.DateTimeField(default=timezone.now())
+    created_date = models.DateTimeField(blank=True, null=True)
     location = models.CharField(max_length=100)
+    description = models.TextField(blank=True, null=True)
     date = models.DateField(null=True, blank=True)
     time = models.TimeField(auto_now=False, auto_now_add=False)
 
@@ -48,5 +49,5 @@ class Attendance(models.Model):
     playdate = models.ForeignKey(Playdate, on_delete=models.CASCADE, related_name='attending')
 
     def __str__(self):
-        return self.dog.name
+        return f'{self.dog.name} {self.playdate}'
     

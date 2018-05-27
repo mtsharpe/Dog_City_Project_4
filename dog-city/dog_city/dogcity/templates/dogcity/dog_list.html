@@ -1,0 +1,14 @@
+{% extends 'dogcity/base.html' %}
+
+{% block content %}
+<h2>Dogs</h2>
+
+<ul>
+  {% for dog in dogs %}
+  <li>
+    <a href="{% url 'dog_detail' pk=dog.pk %}">{{ dog.name }}</a>
+  </li>
+  {% endfor %}
+</ul>
+
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'dogcity/base.html' %}
+
+{% block content %}
+  <h2>Playdates</h2>
+
+  <ul>
+    {% for playdate in playdates %}
+    <li>
+      <a href="{% url 'playdate_detail' pk=playdate.pk %}">{{playdate.location}} {{playdate.date}} {{playdate.time}}</a>
+    </li>
+  </ul>
+  {% endfor %}
+{% endblock %}
