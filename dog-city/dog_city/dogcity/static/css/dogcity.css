@@ -1,10 +1,13 @@
+@import url('https://fonts.googleapis.com/css?family=Alfa+Slab+One|Galada|Lobster');
+
 body {
   font-family: Helvetica;
-  background-color: black;
+  background-color: #D7CEC7;
 }
 
 h2 {
-  font-family: Helvetica
+  font-family: Helvetica;
+  margin: 8px 0 8px 0;
 }
 
 .hero {
@@ -18,19 +21,17 @@ h2 {
 .logo {
   width: 100px;
   margin-left: 8%;
-  z-index: 6;
-  opacity: 1;
-  position: relative;
+  position: absolute;
+  margin-top: -65px;
+  z-index: 2;
 }
 
 nav {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(86, 86, 86, 0.8);
   height: 70px;
-  width: 100%;
+  width: 100vw;
   line-height: 70px;
   text-align: right;
-  position: fixed;
-  top: 0;
   left: 0;
   z-index: 1;
 }
@@ -46,12 +47,12 @@ nav a {
 }
 
 h1 {
+  font-family: 'Galada';
   color: white;
-  font-weight: 600;
   padding-top: 13%;
   margin-left: 8%;
   position: relative;
-  font-size: 7em;
+  font-size: 8em; 
 }
 
 h3 {
@@ -60,4 +61,31 @@ h3 {
   font-size: 3em;
   font-weight: 300;
   margin-top: -60px;
+}
+
+.dog-list {
+  width: 80%;
+  display: grid;
+  grid-gap: 12px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  margin: 0 auto;
+}
+
+.dog-list-item {
+  text-align: center;
+  margin-bottom: 40px;
+  color: #76323F;
+  border-radius: 8px 8px 0 0;
+  border: 1px solid #76323F;
+  padding: 12px 0 10px 0;
+}
+
+.dog-list-item a {
+  text-decoration: none;
+  color: #76323F;
+}
+
+.thumbnail {
+  height: 200px;
+  border-radius: 8px 8px 0 0;
 }

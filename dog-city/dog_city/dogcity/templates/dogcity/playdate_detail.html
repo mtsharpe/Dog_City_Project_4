@@ -1,0 +1,8 @@
+{% extends 'dogcity/base.html' %}
+
+{% block content %}
+  <h2>{{ playdate.location }}</h2>
+  
+  <a href="{% url 'playdate_edit' pk=playdate.pk %}">Edit playdate info</a>
+  <a href="{% url 'playdate_delete' pk=playdate.pk %}">Remove playdate</a>
+{% endblock %}

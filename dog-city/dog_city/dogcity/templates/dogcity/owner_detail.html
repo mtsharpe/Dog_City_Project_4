@@ -1,0 +1,9 @@
+{% extends 'dogcity/base.html' %}
+
+{% block content %}
+
+<h3>{{owner.first_name}} {{owner.last_name}}</h3>
+
+<a href="{% url 'owner_edit' pk=owner.pk %}">Edit owner info</a>
+<a href="{% url 'owner_delete' pk=owner.pk %}">Remove owner</a>
+{% endblock %}

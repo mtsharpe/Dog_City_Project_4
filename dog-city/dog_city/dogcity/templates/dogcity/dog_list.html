@@ -2,13 +2,16 @@
 
 {% block content %}
 <h2>Dogs</h2>
-
-<ul>
-  {% for dog in dogs %}
-  <li>
-    <a href="{% url 'dog_detail' pk=dog.pk %}">{{ dog.name }}</a>
-  </li>
-  {% endfor %}
-</ul>
+<h4><a href="{% url 'dog_create' %}">Add a dog</a></h4>
+<div class="dog-list">
+{% for dog in dogs %}
+  <div class="dog-list-item">
+    <img class="thumbnail" src="{{dog.photo_url}}" alt="Picture of {{dog.name}}"/>
+    <h2>{{ dog.name }}</h2>
+    <a href="{% url 'dog_detail' pk=dog.pk %}">View profile</a> 
+  </div>
+{% endfor %}
+</div>
+  
 
 {% endblock %}

@@ -1,6 +1,10 @@
 {% extends 'dogcity/base.html' %}
 
+{% block content %}
 
 <h2>{{dog.name}}</h2>
 <img src="{{dog.photo_url}}" alt="dog" class="dog-photo">
 
+<a href="{% url 'dog_edit' pk=dog.pk %}">Edit dog info</a>
+<a href="{% url 'dog_delete' pk=dog.pk %}">Remove dog</a>
+{% endblock %}

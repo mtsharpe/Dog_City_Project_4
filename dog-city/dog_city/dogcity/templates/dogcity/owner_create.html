@@ -1,0 +1,10 @@
+{% extends 'dogcity/base.html' %}
+
+{% block content %}
+  <h2>Owner profile</h2>
+    <form method="POST" class="owner-form">
+    {% csrf_token %}
+    {{ form.as_p }}
+  <button type="submit" class="save btn btn-default">Save</button>
+  </form>
+{% endblock %}
