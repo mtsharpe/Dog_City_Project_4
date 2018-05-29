@@ -5,7 +5,7 @@ from django.dispatch import receiver
 from django.utils import timezone
 
 class Owner(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     first_name = models.CharField(max_length=100, blank=True)
     last_name = models.CharField(max_length=100, blank=True)
     email = models.EmailField(max_length=100, blank=True)
@@ -14,14 +14,6 @@ class Owner(models.Model):
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
 
-@receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        Owner.objects.create(user=instance)
-
-@receiver(post_save, sender=User)
-def save_user_profile(sender, instance, **kwargs):
-    instance.profile.save()
 
 class Dog(models.Model):
     name = models.CharField(max_length=100)
@@ -40,6 +32,11 @@ class Playdate(models.Model):
     description = models.TextField(blank=True, null=True)
     date = models.DateField(null=True, blank=True)
     time = models.TimeField(auto_now=False, auto_now_add=False)
+    dogs = models.ManyToManyField(Dog)
+
+    def publish(self):
+        self.created_date = timezone.now()
+        self.save()
 
     def __str__(self):
         return self.location
@@ -51,3 +48,15 @@ class Attendance(models.Model):
     def __str__(self):
         return f'{self.dog.name} {self.playdate}'
     
+
+
+# @receiver(post_save, sender=User)
+# def create_user_profile(sender, instance, created, **kwargs):
+#     if created:
+#         Owner.objects.create(user=instance)
+
+# @receiver(post_save, sender=User)
+# def update_user_profile(sender, instance, created, **kwargs):
+#     if created:
+#         Owner.objects.create(user=instance)
+#     instance.profile.save()

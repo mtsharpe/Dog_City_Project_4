@@ -1,6 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login, authenticate
 from .models import Owner, Dog, Playdate, Attendance
-from .forms import DogForm, PlaydateForm, OwnerForm
+from .forms import DogForm, PlaydateForm, OwnerForm, SignUpForm
+from django.contrib.auth.decorators import login_required
 
 def home_page(request):
     return render(request, 'dogcity/home_page.html')
@@ -9,10 +12,12 @@ def owner_list(request):
     owners = Owner.objects.all()
     return render(request, 'dogcity/owner_list.html', {'owners': owners})
 
+@login_required
 def owner_detail(request, pk):
     owner = get_object_or_404(Owner, pk=pk)
     return render(request, 'dogcity/owner_detail.html', {'owner': owner})
 
+@login_required
 def owner_create(request):
     if request.method == 'POST':
         form = OwnerForm(request.POST)
@@ -23,6 +28,7 @@ def owner_create(request):
         form = OwnerForm()
     return render(request, 'dogcity/owner_create.html', {'form': form})
 
+@login_required
 def owner_edit(request, pk):
     owner = Owner.objects.get(pk=pk)
     if request.method == 'POST':
@@ -34,6 +40,7 @@ def owner_edit(request, pk):
         form = OwnerForm(instance=owner)
     return render(request, 'dogcity/owner_create.html', {'form': form})
 
+@login_required
 def owner_delete(request, pk):
     Owner.objects.get(id=pk).delete()
     return redirect('owner_list')
@@ -42,10 +49,12 @@ def dog_list(request):
     dogs = Dog.objects.all().order_by('name')
     return render(request, 'dogcity/dog_list.html', {'dogs': dogs})
 
+@login_required
 def dog_detail(request, pk):
     dog = get_object_or_404(Dog, pk=pk)
     return render(request, 'dogcity/dog_detail.html', {'dog': dog})
 
+@login_required
 def dog_create(request):
     if request.method == 'POST':
         form = DogForm(request.POST)
@@ -56,6 +65,7 @@ def dog_create(request):
         form = DogForm()
     return render(request, 'dogcity/dog_create.html', {'form': form})
 
+@login_required
 def dog_edit(request, pk):
     dog = Dog.objects.get(pk=pk)
     if request.method == 'POST':
@@ -67,28 +77,33 @@ def dog_edit(request, pk):
         form = DogForm(instance=dog)
     return render(request, 'dogcity/dog_create.html', {'form': form})
 
+@login_required
 def dog_delete(request, pk):
     Dog.objects.get(id=pk).delete()
     return redirect('dog_list')
 
 def playdate_list(request):
-    playdates = Playdate.objects.all()
+    playdates = Playdate.objects.all().order_by('date')
     return render(request, 'dogcity/playdate_list.html', {'playdates': playdates})
 
+@login_required
 def playdate_detail(request, pk):
     playdate = get_object_or_404(Playdate, pk=pk)
     return render(request, 'dogcity/playdate_detail.html', {'playdate': playdate})
 
+@login_required
 def playdate_create(request):
     if request.method == 'POST':
         form = PlaydateForm(request.POST)
         if form.is_valid():
             playdate = form.save()
+            playdate.publish()
             return redirect('playdate_detail', pk=playdate.pk)
     else:
         form = PlaydateForm()
     return render(request, 'dogcity/playdate_create.html', {'form': form})
 
+@login_required
 def playdate_edit(request, pk):
     playdate = Playdate.objects.get(pk=pk)
     if request.method == 'POST':
@@ -100,6 +115,7 @@ def playdate_edit(request, pk):
         form = PlaydateForm(instance=playdate)
     return render(request, 'dogcity/playdate_create.html', {'form': form})
 
+@login_required
 def playdate_delete(request, pk):
     Playdate.objects.get(id=pk).delete()
     return redirect('playdate_list')
@@ -115,3 +131,17 @@ def remove_attendance(request, playdate_id, dog_id):
     dog = Dog.objects.get(id=dog_id)
     Attendance.objects.get(playdate=playdate, dog=dog_id).delete()
     return redirect('playdate_detail', pk=playdate.pk)    
+
+def signup(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('login')
+    else:
+        form = SignUpForm()
+    return render(request, 'dogcity/signup.html', {'form': form})

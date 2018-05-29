@@ -1,9 +1,19 @@
 {% extends 'dogcity/base.html' %}
 
 {% block content %}
+<nav>
+    <a class='logo' href="{% url 'home_page' %}"> <img src="../static/images/Dog_City_logo_White.svg" alt="logo"></a>
+    <a href="{% url 'dog_list' %}">Dogs</a>
+    <a href="{% url 'playdate_list' %}">Playdates</a>
+  </nav>
 
-<h3>{{owner.first_name}} {{owner.last_name}}</h3>
-
-<a href="{% url 'owner_edit' pk=owner.pk %}">Edit owner info</a>
-<a href="{% url 'owner_delete' pk=owner.pk %}">Remove owner</a>
+<div class="bg">
+<h2>{{owner.first_name}} {{owner.last_name}}</h2>
+{% for dog in owner.dogs.all %}
+<h4>Dog name: <a href="{% url 'dog_detail' pk=dog.pk %}">{{dog.name}}</a></h4>
+<img src="{{dog.photo_url}}" alt="dog" class="dog-small">
+{% endfor %}
+<a class="add-button" href="{% url 'owner_edit' pk=owner.pk %}">Edit owner info</a>
+<a class="add-button" href="{% url 'owner_delete' pk=owner.pk %}">Remove owner</a>
+</div>
 {% endblock %}

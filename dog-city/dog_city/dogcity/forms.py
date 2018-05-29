@@ -1,5 +1,7 @@
 from django import forms
 from .models import Owner, Dog, Playdate, Attendance
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
 
 class DogForm(forms.ModelForm):
     class Meta:
@@ -9,11 +11,14 @@ class DogForm(forms.ModelForm):
 class PlaydateForm(forms.ModelForm):
     class Meta:
         model = Playdate
-        fields = ('created_date', 'location', 'description', 'date', 'time',)
+        fields = ('location', 'description', 'date', 'time', 'dogs',)
 
 class OwnerForm(forms.ModelForm):
     class Meta:
         model = Owner
-        fields = ('user', 'first_name', 'last_name', 'email', 'zipcode',)
+        fields = ('first_name', 'last_name', 'email', 'zipcode',)
 
-       
+class SignUpForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ('username', 'password1', 'password2',)

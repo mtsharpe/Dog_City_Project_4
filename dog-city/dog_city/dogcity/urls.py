@@ -19,6 +19,5 @@ urlpatterns = [
     path('playdates/new', views.playdate_create, name='playdate_create'),
     path('playdates/<int:pk>/edit', views.playdate_edit, name='playdate_edit'),
     path('playdates/<int:pk>/delete', views.playdate_delete, name='playdate_delete'),
-    url(r'^attending/(?P<playdate_id>\d+)/create$', views.add_attendance, name='add_attendance'),
-    url(r'^attending/(?P<playdate_id>\d+)/remove$', views.remove_attendance, name='remove_attendance')
+    path('signup', views.signup, name='signup')
 ]

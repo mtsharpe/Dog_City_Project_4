@@ -1,13 +1,20 @@
 {% extends 'dogcity/base.html' %}
 
 {% block content %}
+<nav>
+    <a class='logo' href="{% url 'home_page' %}"> <img src="../static/images/Dog_City_logo_White.svg" alt="logo"></a>
+    <a href="{% url 'dog_list' %}">Dogs</a>
+  </nav>
+  <div class="bg">
   <h2>Playdates</h2>
-  <h4><a href="{% url 'playdate_create' %}">Add a playdate</a></h4>
-  <ul>
+  <a class="add-button" href="{% url 'playdate_create' %}">Add a playdate</a></h4>
+  
     {% for playdate in playdates %}
-    <li>
-      <a href="{% url 'playdate_detail' pk=playdate.pk %}">{{playdate.location}} {{playdate.date}} {{playdate.time}}</a>
-    </li>
-  </ul>
+    <div class="playdates-list">
+      {% comment %} <h6>{{playdate.created_date}}</h6> {% endcomment %}
+      <h4>{{playdate.location}} {{playdate.date}} {{playdate.time}}</h3>
+      <a class="detail" href="{% url 'playdate_detail' pk=playdate.pk %}">More details</a>
+    </div>
   {% endfor %}
+</div>
 {% endblock %}
