@@ -8,9 +8,9 @@
 </nav>
 <div class="bg">
   <h2>{{ playdate.location }}</h2>
-  <h4>{{playdate.date}}</h4>
-  <h4>{{playdate.time}}</h4>
-  <h4>{{playdate.description}}</h4>
+  <h4>{{ playdate.date }}</h4>
+  <h4>{{ playdate.time }}</h4>
+  <h4>{{ playdate.description }}</h4>
 
   <a class="add-button" href="{% url 'playdate_edit' pk=playdate.pk %}">Edit playdate info</a>
   <a class="add-button" href="{% url 'playdate_delete' pk=playdate.pk %}">Remove playdate</a>

@@ -84,6 +84,10 @@ DATABASES = {
     }
 }
 
+DATABASES['default'] = dj_database_url.config(conn_max_age=600)
+DATABASES['default'] = dj_database_url.config(default='postgres://ehwnnztikcpxrd:82ba4c86dcd70f36020083236782c7e97fe52dfe2d7e0640ec61bd7c6c02e1be@ec2-54-235-206-118.compute-1.amazonaws.com:5432/ded1lp39420ed0')
+db_from_env = dj_database_url.config()
+
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
@@ -126,3 +130,17 @@ STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = 'home_page'
 
 LOGOUT_REDIRECT_URL = 'home_page'
+
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.9/howto/static-files/
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
+STATIC_URL = '/static/'
+
+# Extra places for collectstatic to find static files.
+STATICFILES_DIRS = (
+    os.path.join(PROJECT_ROOT, 'static'),
+)
+
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'

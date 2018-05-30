@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, authenticate
-from .models import Owner, Dog, Playdate, Attendance
+from .models import Owner, Dog, Playdate
 from .forms import DogForm, PlaydateForm, OwnerForm, SignUpForm
 from django.contrib.auth.decorators import login_required
 

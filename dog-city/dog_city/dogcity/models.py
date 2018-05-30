@@ -14,6 +14,14 @@ class Owner(models.Model):
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
 
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Owner.objects.create(user=instance)
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, created, **kwargs):
+    instance.owner.save()
 
 class Dog(models.Model):
     name = models.CharField(max_length=100)
@@ -41,22 +49,11 @@ class Playdate(models.Model):
     def __str__(self):
         return self.location
 
-class Attendance(models.Model):
-    dog = models.ForeignKey(Dog, on_delete=models.CASCADE, related_name='attending')
-    playdate = models.ForeignKey(Playdate, on_delete=models.CASCADE, related_name='attending')
+# class Attendance(models.Model):
+#     dog = models.ForeignKey(Dog, on_delete=models.CASCADE, related_name='attending')
+#     playdate = models.ForeignKey(Playdate, on_delete=models.CASCADE, related_name='attending')
 
-    def __str__(self):
-        return f'{self.dog.name} {self.playdate}'
+#     def __str__(self):
+#         return f'{self.dog.name} {self.playdate}'
     
 
-
-# @receiver(post_save, sender=User)
-# def create_user_profile(sender, instance, created, **kwargs):
-#     if created:
-#         Owner.objects.create(user=instance)
-
-# @receiver(post_save, sender=User)
-# def update_user_profile(sender, instance, created, **kwargs):
-#     if created:
-#         Owner.objects.create(user=instance)
-#     instance.profile.save()
