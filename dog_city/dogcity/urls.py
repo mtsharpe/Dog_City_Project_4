@@ -14,10 +14,10 @@ urlpatterns = [
     path('dogs/new', views.dog_create, name='dog_create'),
     path('dogs/<int:pk>/edit', views.dog_edit, name='dog_edit'),
     path('dogs/<int:pk>/delete', views.dog_delete, name='dog_delete'),
-    path('playdates', views.playdate_list, name='playdate_list'),
-    path('playdates/<int:pk>', views.playdate_detail, name='playdate_detail'),
-    path('playdates/new', views.playdate_create, name='playdate_create'),
-    path('playdates/<int:pk>/edit', views.playdate_edit, name='playdate_edit'),
-    path('playdates/<int:pk>/delete', views.playdate_delete, name='playdate_delete'),
+    path('walks', views.walk_list, name='walk_list'),
+    path('walks/<int:pk>', views.walk_detail, name='walk_detail'),
+    path('walks/new', views.walk_create, name='walk_create'),
+    path('walks/<int:pk>/edit', views.walk_edit, name='walk_edit'),
+    path('walks/<int:pk>/delete', views.walk_delete, name='walk_delete'),
     path('signup', views.signup, name='signup')
 ]

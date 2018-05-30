@@ -1,8 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, authenticate
-from .models import Owner, Dog, Playdate
-from .forms import DogForm, PlaydateForm, OwnerForm, SignUpForm
+from .models import Owner, Dog, Walk
+from .forms import DogForm, WalkForm, OwnerForm, SignUpForm
 from django.contrib.auth.decorators import login_required
 
 def home_page(request):
@@ -82,55 +82,43 @@ def dog_delete(request, pk):
     Dog.objects.get(id=pk).delete()
     return redirect('dog_list')
 
-def playdate_list(request):
-    playdates = Playdate.objects.all().order_by('date')
-    return render(request, 'dogcity/playdate_list.html', {'playdates': playdates})
+def walk_list(request):
+    walks = Walk.objects.all().order_by('date')
+    return render(request, 'dogcity/walk_list.html', {'walks': walks})
 
 @login_required
-def playdate_detail(request, pk):
-    playdate = get_object_or_404(Playdate, pk=pk)
-    return render(request, 'dogcity/playdate_detail.html', {'playdate': playdate})
+def walk_detail(request, pk):
+    walk = get_object_or_404(Walk, pk=pk)
+    return render(request, 'dogcity/walk_detail.html', {'walk': walk})
 
 @login_required
-def playdate_create(request):
+def walk_create(request):
     if request.method == 'POST':
-        form = PlaydateForm(request.POST)
+        form = WalkForm(request.POST)
         if form.is_valid():
-            playdate = form.save()
-            playdate.publish()
-            return redirect('playdate_detail', pk=playdate.pk)
+            walk = form.save()
+            walk.publish()
+            return redirect('walk_detail', pk=walk.pk)
     else:
-        form = PlaydateForm()
-    return render(request, 'dogcity/playdate_create.html', {'form': form})
+        form = WalkForm()
+    return render(request, 'dogcity/walk_create.html', {'form': form})
 
 @login_required
-def playdate_edit(request, pk):
-    playdate = Playdate.objects.get(pk=pk)
+def walk_edit(request, pk):
+    walk = Walk.objects.get(pk=pk)
     if request.method == 'POST':
-        form = PlaydateForm(request.POST, instance=playdate)
+        form = WalkForm(request.POST, instance=walk)
         if form.is_valid():
-            playdate = form.save()
-            return redirect('playdate_detail', pk=playdate.pk)
+            walk = form.save()
+            return redirect('walk_detail', pk=walk.pk)
     else: 
-        form = PlaydateForm(instance=playdate)
-    return render(request, 'dogcity/playdate_create.html', {'form': form})
+        form = WalkForm(instance=walk)
+    return render(request, 'dogcity/walk_create.html', {'form': form})
 
 @login_required
-def playdate_delete(request, pk):
-    Playdate.objects.get(id=pk).delete()
-    return redirect('playdate_list')
-
-def add_attendance(request, playdate_id, dog_id):
-    playdate = Playdate.objects.get(id=playdate_id)
-    dog = Dog.objects.get(id=dog_id)
-    Attendance.objects.create(playdate=playdate, dog=dog)
-    return redirect('playdate_detail', pk=playdate.pk)
-
-def remove_attendance(request, playdate_id, dog_id):
-    playdate = Playdate.objects.get(id=playdate_id)
-    dog = Dog.objects.get(id=dog_id)
-    Attendance.objects.get(playdate=playdate, dog=dog_id).delete()
-    return redirect('playdate_detail', pk=playdate.pk)    
+def walk_delete(request, pk):
+    Walk.objects.get(id=pk).delete()
+    return redirect('walk_list')
 
 def signup(request):
     if request.method == 'POST':
@@ -145,3 +133,16 @@ def signup(request):
     else:
         form = SignUpForm()
     return render(request, 'dogcity/signup.html', {'form': form})
+
+
+# def add_attendance(request, playdate_id, dog_id):
+#     walk = Walk.objects.get(id=walk_id)
+#     dog = Dog.objects.get(id=dog_id)
+#     Attendance.objects.create(wal=playdate, dog=dog)
+#     return redirect('playdate_detail', pk=playdate.pk)
+
+# def remove_attendance(request, playdate_id, dog_id):
+#     playdate = Playdate.objects.get(id=playdate_id)
+#     dog = Dog.objects.get(id=dog_id)
+#     Attendance.objects.get(playdate=playdate, dog=dog_id).delete()
+#     return redirect('playdate_detail', pk=playdate.pk)    

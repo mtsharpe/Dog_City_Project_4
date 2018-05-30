@@ -1,22 +1,22 @@
 from django import forms
-from .models import Owner, Dog, Playdate
+from .models import Owner, Dog, Walk
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
 class DogForm(forms.ModelForm):
     class Meta:
         model = Dog
-        fields = ('name', 'age', 'breed', 'personality', 'photo_url', 'owner',)
+        fields = ('name', 'age', 'breed', 'personality', 'instructions', 'photo_url', 'owner',)
 
-class PlaydateForm(forms.ModelForm):
+class WalkForm(forms.ModelForm):
     class Meta:
-        model = Playdate
-        fields = ('location', 'description', 'date', 'time', 'dogs',)
+        model = Walk
+        fields = ('day', 'date', 'dogs',)
 
 class OwnerForm(forms.ModelForm):
     class Meta:
         model = Owner
-        fields = ('first_name', 'last_name', 'email', 'zipcode',)
+        fields = ('first_name', 'last_name', 'email', 'phone', 'address', 'zipcode',)
 
 class SignUpForm(UserCreationForm):
     class Meta:

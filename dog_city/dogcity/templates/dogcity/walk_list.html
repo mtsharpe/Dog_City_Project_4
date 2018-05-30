@@ -6,14 +6,14 @@
     <a href="{% url 'dog_list' %}">Dogs</a>
   </nav>
   <div class="bg">
-  <h2>Playdates</h2>
-  <a class="add-button" href="{% url 'playdate_create' %}">Add a playdate</a></h4>
+  <h2>Walks</h2>
+  <a class="add-button" href="{% url 'walk_create' %}">Add a walk</a></h4>
   
-    {% for playdate in playdates %}
-    <div class="playdates-list">
+    {% for walk in walks %}
+    <div class="walks-list">
       {% comment %} <h6>{{playdate.created_date}}</h6> {% endcomment %}
-      <h4>{{playdate.location}} {{playdate.date}} {{playdate.time}}</h3>
-      <a class="detail" href="{% url 'playdate_detail' pk=playdate.pk %}">More details</a>
+      <h4>{{walk.location}} {{walk.date}} {{walk.time}}</h3>
+      <a class="detail" href="{% url 'walk_detail' pk=walk.pk %}">More details</a>
     </div>
   {% endfor %}
 </div>

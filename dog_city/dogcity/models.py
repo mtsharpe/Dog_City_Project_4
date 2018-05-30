@@ -9,6 +9,8 @@ class Owner(models.Model):
     first_name = models.CharField(max_length=100, blank=True)
     last_name = models.CharField(max_length=100, blank=True)
     email = models.EmailField(max_length=100, blank=True)
+    phone = models.CharField(max_length=12, null=True, blank=True)
+    address = models.CharField(max_length=100, blank=True)
     zipcode = models.PositiveIntegerField(null=True, blank=True)
 
     def __str__(self):
@@ -28,18 +30,17 @@ class Dog(models.Model):
     age = models.PositiveIntegerField(null=True, blank=True)
     breed = models.CharField(max_length=100)
     personality = models.TextField()
+    instructions = models.TextField(null=True, blank=True)
     photo_url = models.TextField()
     owner = models.ForeignKey(Owner, on_delete=models.CASCADE, related_name='dogs')
 
     def __str__(self):
         return self.name
 
-class Playdate(models.Model):
+class Walk(models.Model):
     created_date = models.DateTimeField(blank=True, null=True)
-    location = models.CharField(max_length=100)
-    description = models.TextField(blank=True, null=True)
-    date = models.DateField(null=True, blank=True)
-    time = models.TimeField(auto_now=False, auto_now_add=False)
+    day = models.CharField(max_length=100)
+    date = models.CharField(max_length=100, null=True, blank=True)
     dogs = models.ManyToManyField(Dog)
 
     def publish(self):
@@ -47,7 +48,7 @@ class Playdate(models.Model):
         self.save()
 
     def __str__(self):
-        return self.location
+        return self.date
 
 # class Attendance(models.Model):
 #     dog = models.ForeignKey(Dog, on_delete=models.CASCADE, related_name='attending')
