@@ -1,1 +1,1 @@
-web: gunicorn --pythonpath dog_city dog_city.wsgi
+web: gunicorn --pythonpath dog-city dog_city dog_city.wsgi
