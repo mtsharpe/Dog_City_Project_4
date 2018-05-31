@@ -18,7 +18,7 @@
 
 <h2>Dogs</h2>
 {% for dog in owner.dogs.all %}
-<h4>Dog name: <a href="{% url 'dog_detail' pk=dog.pk %}">{{dog.name}}</a></h4>
+<h4><a href="{% url 'dog_detail' pk=dog.pk %}">{{dog.name}}</a></h4>
 <img src="{{dog.photo_url}}" alt="dog" class="dog-small">
 {% endfor %}
 

@@ -9,7 +9,7 @@ def home_page(request):
     return render(request, 'dogcity/home_page.html')
 
 def owner_list(request):
-    owners = Owner.objects.all()
+    owners = Owner.objects.all().order_by('last_name')
     return render(request, 'dogcity/owner_list.html', {'owners': owners})
 
 @login_required

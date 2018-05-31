@@ -12,8 +12,8 @@
 <h4>Age: {{dog.age}}</h4>
 <h4>Breed: {{dog.breed}}</h4>
 <h4>Personality: {{dog.personality}}</h4>
+<h4>Instructions: {{dog.instructions}}</h4>
 <h4>Owner: <a href="{% url 'owner_detail' pk=dog.owner.pk %}">{{dog.owner}}</a></h4>
-
 <a class="add-button" href="{% url 'dog_edit' pk=dog.pk %}">Edit dog info</a>
 <a class="add-button" href="{% url 'dog_delete' pk=dog.pk %}">Remove dog</a>
 </div>

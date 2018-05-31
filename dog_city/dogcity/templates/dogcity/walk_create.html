@@ -7,10 +7,12 @@
     <a href="{% url 'walk_list' %}">Walks</a>
   </nav>
 <div class="form">
-<h2>New Walk</h2>
-<form method="POST" class="walk-form">
+<h2>Add/Edit Walk</h2>
+<form method="POST" >
   {% csrf_token %}
+  <div class='walk-form'>
   {{ form.as_p }}
+  </div>
   <button type="submit" class="save btn btn-default">Save</button>
 </form>
 </div>

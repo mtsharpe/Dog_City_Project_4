@@ -7,7 +7,7 @@
     <a href="{% url 'walk_list' %}">Walks</a>
   </nav>
   <div class="form">
-  <h2>Owner profile</h2>
+  <h2>Add/Edit Owner Profile</h2>
     <form method="POST" class="owner-form">
     {% csrf_token %}
     {{ form.as_p }}
