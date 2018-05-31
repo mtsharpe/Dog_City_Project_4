@@ -9,6 +9,8 @@
 
 <div class="bg">
 <h2>{{owner.first_name}} {{owner.last_name}}</h2>
+<h4>Phone: {{owner.phone}}</h4>
+<h4>Address: {{owner.address}}</h4>
 <h4>Zipcode: {{owner.zipcode}}</h4>
 <h4>Email: {{owner.email}}</h4>
 <a class="add-button" href="{% url 'owner_edit' pk=owner.pk %}">Edit owner info</a>

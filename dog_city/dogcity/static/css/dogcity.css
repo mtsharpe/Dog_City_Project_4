@@ -57,8 +57,6 @@ nav a {
   cursor: pointer;
 }
 
-
-
 h1 {
   font-family: 'Oleo Script';
   color: white;
@@ -164,14 +162,18 @@ h4 a {
   font-size: 14px;
 }
 
-.playdates-list {
+.walks-list {
   border-bottom: 1px solid #76323f;
   width: 50%;
   margin: 0 auto;
   padding-bottom: 10px;
 }
 
-.playdates-list a {
+.walks-list a {
   text-decoration: none;
   color: #76323f;
+}
+
+.check {
+  list-style-type: none;
 }
