@@ -7,9 +7,9 @@ Dog City is an assistant app for dog walkers. It stores profile information for 
 Having worked part-time as a dog walker in the past,I found the app used by the company to be hard to navigate and access. Also, there was no way to customize a walk schedule for a given day. 
 
 ## Tech used
-Python
-Django
-PostgreSQL
+Python  
+Django  
+PostgreSQL  
 CSS
 
 ## Installation
