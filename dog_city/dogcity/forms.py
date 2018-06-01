@@ -10,7 +10,6 @@ class DogForm(forms.ModelForm):
         fields = ('name', 'age', 'breed', 'personality', 'instructions', 'photo_url', 'owner',)
 
 class WalkForm(forms.ModelForm):
-    
     class Meta:
         model = Walk
         fields = ('date', 'day', 'dogs',)
@@ -23,7 +22,7 @@ class WalkForm(forms.ModelForm):
             super(WalkForm, self).__init__(*args, **kwargs)                    
             self.fields['dogs'].widget = CheckboxSelectMultiple()
             self.fields['dogs'].queryset = Dog.objects.all()
-    
+            
 
 class OwnerForm(forms.ModelForm):
     class Meta:

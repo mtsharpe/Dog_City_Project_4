@@ -38,8 +38,17 @@ class Dog(models.Model):
         return self.name
 
 class Walk(models.Model):
+    DAY_CHOICES = (
+        ('MON', 'Monday'),
+        ('TUE', 'Tuesday'),
+        ('WED','Wednesday'),
+        ('THU', 'Thursday'),
+        ('FRI', 'Friday'),
+        ('SAT', 'Saturday'),
+        ('SUN', 'Sunday'),
+    )
     created_date = models.DateTimeField(blank=True, null=True)
-    day = models.CharField(max_length=100)
+    day = models.CharField(max_length=3, choices=DAY_CHOICES)
     date = models.DateField(null=True, blank=True)
     dogs = models.ManyToManyField(Dog)
 
