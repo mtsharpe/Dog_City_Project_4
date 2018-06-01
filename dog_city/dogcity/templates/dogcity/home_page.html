@@ -1,0 +1,26 @@
+{% extends 'dogcity/base.html' %}
+
+
+{% block content %}
+<nav>
+    <a class='logo' href="{% url 'home_page' %}"> <img src="../../static/images/Dog_City_logo_white.svg" alt="logo"></a>
+    
+    {% if user.is_authenticated %}
+      <a href="{% url 'dog_list' %}">Dogs</a>
+      <a href="{% url 'walk_list' %}">Walks</a>
+      <a href="{% url 'owner_list' %}">Owners</a><br>
+      <a class="username">Welcome, {{user.username}}</a>
+      <a class="signout" href="{% url 'logout' %}">Sign out</a>
+      
+     {% else %} 
+    <a href="{% url 'signup' %}">Signup</a>
+    <a href="{% url 'login' %}">Login</a>
+    {% endif %}
+  </nav>
+  <div class="hero"></div>
+  <div>
+    <h1>Dog City</h1>
+    <h3>— THE BEST DOG IS A TIRED DOG —</h3>
+  </div>
+
+{% endblock %}

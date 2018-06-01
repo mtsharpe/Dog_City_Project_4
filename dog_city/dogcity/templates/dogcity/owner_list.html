@@ -1,0 +1,17 @@
+{% extends 'dogcity/base.html' %}
+
+{% block content %}
+<nav>
+  <a class='logo' href="{% url 'home_page' %}"> <img src="../../static/images/Dog_City_logo_white.svg" alt="logo"></a>
+    <a href="{% url 'dog_list' %}">Dogs</a>
+    <a href="{% url 'walk_list' %}">Walks</a>
+  </nav>
+<div class="bg">
+<h2>Owners</h2>  
+<a class="add-button" href="{% url 'owner_create' %}">Add owner</a>
+{% for owner in owners %}
+ <h4><a href="{% url 'owner_detail' pk=owner.pk %}">{{owner.first_name}} {{owner.last_name}}</a></h4>
+
+{% endfor %}
+</div>  
+{% endblock %}

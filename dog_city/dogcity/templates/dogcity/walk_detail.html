@@ -1,0 +1,24 @@
+{% extends 'dogcity/base.html' %} {% block content %}
+<nav>
+  <a class='logo' href="{% url 'home_page' %}"> <img src="../../static/images/Dog_City_logo_white.svg" alt="logo"></a>
+  <a href="{% url 'dog_list' %}">Dogs</a>
+  <a href="{% url 'walk_list' %}">Walks</a>
+</nav>
+<div class="bg">
+  <h2>{{ walk.date }}</h2>
+  <h4>{{ walk.day }}</h4>
+
+  <a class="add-button" href="{% url 'walk_edit' pk=walk.pk %}">Edit walk info</a>
+  <a class="add-button" href="{% url 'walk_delete' pk=walk.pk %}">Remove walk</a>
+
+  <h2>Who's walking</h2>
+  <div class="walk-list">
+  {% for dog in walk.dogs.all %}
+  <div class="walk-list-item">
+  <img src="{{dog.photo_url}}" alt="dog" class="dog-small">
+  <h4><a href="{% url 'dog_detail' pk=dog.pk %}">{{dog.name}}</a></h4>
+</div>
+  {% endfor %}
+
+</div>
+{% endblock %}
