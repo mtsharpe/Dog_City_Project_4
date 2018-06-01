@@ -116,6 +116,8 @@ h3 {
 
 .dog-photo {
   height: auto;
+  border-radius: 8px 8px 0 0;
+  border: 1px solid #76323f;
 }
 
 .dog-small {
